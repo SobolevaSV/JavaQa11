@@ -2,12 +2,31 @@ package ru.netology;
 
 public class Radio {
     // вводим переменные текущей радиостанции и текущей громкости
-    public int currentStation;
-    public int currentVolume;
+    private int currentStation;
+    private int currentVolume;
 
-    // получаем информацию о текущей радиостанции
+    // геттеры
     public int getCurrentStation() {
         return currentStation;
+    }
+
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
+
+    // сеттеры
+    public void setCurrentStation(int newCurrentStation) {
+        if (newCurrentStation < 0) {
+            return;
+        }
+        if (newCurrentStation > 9) {
+            return;
+        }
+        currentStation = newCurrentStation;
+    }
+
+    public void setCurrentVolume(int currentVolume) {
+        this.currentVolume = currentVolume;
     }
 
     // переключаем на следующую радиостанцию
@@ -26,22 +45,6 @@ public class Radio {
         } else {
             currentStation = 9;
         }
-    }
-
-    // установливаем иную радиостанцию и проверяем на допустимость
-    public void setCurrentStation(int newCurrentStation) {
-        if (newCurrentStation < 0) {
-            return;
-        }
-        if (newCurrentStation > 9) {
-            return;
-        }
-        currentStation = newCurrentStation;
-    }
-
-    // получаем информацию о текущей громкости
-    public int getCurrentVolume() {
-        return currentVolume;
     }
 
     // увеличиваем громкость на 1 пункт
