@@ -1,13 +1,38 @@
 package ru.netology;
 
 public class Radio {
-    // вводим переменные текущей радиостанции и текущей громкости
+    // вводим переменные
+    private int quantityStations = 10; // количество радиостанций
+    private int firstStation = 0; // первая радиостанция
+    private int lastStation = quantityStations - 1; // последняя радиостанция
     private int currentStation;
+    private int minVolume = 0; // минимальная громкость
+    private int maxVolume = 100; // максимальная громкость
     private int currentVolume;
 
     // геттеры
+    public int getQuantityStations() {
+        return quantityStations;
+    }
+
+    public int getFirstStation() {
+        return firstStation;
+    }
+
+    public int getLastStation() {
+        return lastStation;
+    }
+
     public int getCurrentStation() {
         return currentStation;
+    }
+
+    public int getMinVolume() {
+        return minVolume;
+    }
+
+    public int getMaxVolume() {
+        return maxVolume;
     }
 
     public int getCurrentVolume() {
@@ -16,10 +41,10 @@ public class Radio {
 
     // сеттеры
     public void setCurrentStation(int newCurrentStation) {
-        if (newCurrentStation < 0) {
+        if (newCurrentStation < firstStation) {
             return;
         }
-        if (newCurrentStation > 9) {
+        if (newCurrentStation > lastStation) {
             return;
         }
         currentStation = newCurrentStation;
@@ -29,27 +54,38 @@ public class Radio {
         this.currentVolume = currentVolume;
     }
 
+    // конструктор установки количества радиостанций по желанию
+    public Radio(int quantityStations) {
+        this.quantityStations = quantityStations;
+        this.lastStation = quantityStations - 1;
+    }
+
+    // конструктор установки количества радиостанций по умолчанию
+    public Radio() {
+        this.quantityStations = quantityStations;
+    }
+
     // переключаем на следующую радиостанцию
     public void nextStation() {
-        if (currentStation < 9) {
+        if (currentStation < lastStation) {
             currentStation = currentStation + 1;
         } else {
-            currentStation = 0;
+            currentStation = firstStation;
         }
     }
 
     // переключаем на предыдущую радиостанцию
     public void prevStation() {
-        if (currentStation > 0) {
+        if (currentStation > firstStation) {
             currentStation = currentStation - 1;
         } else {
-            currentStation = 9;
+            currentStation = lastStation;
         }
     }
 
     // увеличиваем громкость на 1 пункт
     public void increaseVolume() {
-        if (currentVolume < 100) {
+        if (currentVolume < maxVolume) {
             currentVolume = currentVolume + 1;
         } else {
             currentVolume = currentVolume;
@@ -58,7 +94,7 @@ public class Radio {
 
     // уменьшаем громкость на 1 пункт
     public void decreaseVolume() {
-        if (currentVolume > 0) {
+        if (currentVolume > minVolume) {
             currentVolume = currentVolume - 1;
         } else {
             currentVolume = currentVolume;
